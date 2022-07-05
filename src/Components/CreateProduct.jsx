@@ -1,6 +1,6 @@
 import React from 'react'
 import { useFormik } from 'formik'
-import axios from 'axios'
+import axios from '../Axios'
 import { useNavigate } from 'react-router-dom'
 
 function CreateProduct() {
@@ -41,9 +41,13 @@ function CreateProduct() {
         },
 
         onSubmit: async (values) => {
-            await axios.post("https://62ad8a95402135c7acc26bf2.mockapi.io/products", values)
-            alert('Product Added Successfully...!')
-            navigate('/mainpage/products')
+            try {
+                await axios.post("/products", values)
+                alert('Product Added Successfully...!')
+                navigate('/mainpage/products')
+            } catch (error) {
+                alert('Something went wrong!')
+            }
         }
     })
 

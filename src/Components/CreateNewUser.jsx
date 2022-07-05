@@ -1,6 +1,6 @@
 import React from 'react'
 import { useFormik } from 'formik'
-import axios from 'axios'
+import axios from '../Axios'
 import { useNavigate } from 'react-router-dom'
 
 function CreateNewUser() {
@@ -60,9 +60,13 @@ function CreateNewUser() {
         },
 
         onSubmit: async (values) => {
-            await axios.post("https://62ad8a95402135c7acc26bf2.mockapi.io/students", values)
-            alert('Student Added successfully...!')
-            navigate('/mainpage/students')
+            try {
+                await axios.post("/students", values)
+                alert('Student Added successfully...!')
+                navigate('/mainpage/students')
+            } catch (error) {
+                alert('Something went wrong!')
+            }
         }
     })
 

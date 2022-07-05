@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../Axios'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -6,8 +6,12 @@ function Students() {
     const [userData, setUserData] = useState([])
 
     let getdata = async () => {
-        let fetchData = await axios.get('https://62ad8a95402135c7acc26bf2.mockapi.io/students')
-        setUserData(fetchData.data)
+        try {
+            let fetchData = await axios.get('/students')
+            setUserData(fetchData.data)
+        } catch (error) {
+            alert('Something went wrong!')
+        }
     }
 
     useEffect(() => {
@@ -15,10 +19,14 @@ function Students() {
     }, [])
 
     let handleDelete = async (id) => {
-        let popup = window.confirm('Confirm to delete?')
-        if (popup) {
-            await axios.delete(`https://62ad8a95402135c7acc26bf2.mockapi.io/students/${id}`)
-            getdata()
+        try {
+            let popup = window.confirm('Confirm to delete?')
+            if (popup) {
+                await axios.delete(`/students/${id}`)
+                getdata()
+            }
+        } catch (error) {
+            alert('Something went wrong!')
         }
     }
 

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import axios from '../Axios'
 
 function EditStudent() {
     let { id } = useParams();
@@ -64,16 +64,24 @@ function EditStudent() {
         },
 
         onSubmit: async (values) => {
-            await axios.put(`https://62ad8a95402135c7acc26bf2.mockapi.io/students/${id}`, values);
-            alert('Student data updated...!')
-            navigate('/mainpage/students')
+            try {
+                await axios.put(`/students/${id}`, values);
+                alert('Student data updated...!')
+                navigate('/mainpage/students')
+            } catch (error) {
+                alert('Something went wrong!')
+            }
         }
     })
 
     useEffect(() => {
         let getdata = async () => {
-            let fetchData = await axios.get(`https://62ad8a95402135c7acc26bf2.mockapi.io/students/${id}`)
-            formik.setValues(fetchData.data)
+            try {
+                let fetchData = await axios.get(`/students/${id}`)
+                formik.setValues(fetchData.data)
+            } catch (error) {
+                alert('Something went wrong!')
+            }
         }
         getdata()
     }, [])

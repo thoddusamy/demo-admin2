@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useFormik } from 'formik'
-import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import axios from '../Axios'
 
 function EditProduct() {
     const { id } = useParams()
@@ -43,16 +43,24 @@ function EditProduct() {
         },
 
         onSubmit: async (values) => {
-            await axios.put(`https://62ad8a95402135c7acc26bf2.mockapi.io/products/${id}`, values)
-            alert('Data saved Successfully...!')
-            navigate('/mainpage/products')
+            try {
+                await axios.put(`/products/${id}`, values)
+                alert('Data saved Successfully...!')
+                navigate('/mainpage/products')
+            } catch (error) {
+                alert('Something went wrong!')
+            }
         }
     })
 
     useEffect(() => {
         let getData = async () => {
-            let getFetchData = await axios.get(`https://62ad8a95402135c7acc26bf2.mockapi.io/products/${id}`)
-            formik.setValues(getFetchData.data)
+            try {
+                let getFetchData = await axios.get(`/products/${id}`)
+                formik.setValues(getFetchData.data)
+            } catch (error) {
+                alert('Something went wrong!')
+            }
         }
         getData()
     }, [])

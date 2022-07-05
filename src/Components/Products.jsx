@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { StarFill } from 'react-bootstrap-icons'
-import axios from 'axios'
+import axios from '../Axios'
 
 function Products() {
     const [productData, setProductData] = useState([])
 
     let fetchData = async () => {
-        let getData = await axios.get("https://62ad8a95402135c7acc26bf2.mockapi.io/products")
-        setProductData(getData.data)
+        try {
+            let getData = await axios.get("/products")
+            setProductData(getData.data)
+        } catch (error) {
+            alert('Something went wrong!')
+        }
     }
 
     useEffect(() => {
@@ -16,11 +20,15 @@ function Products() {
     }, [])
 
     let handleDelete = async (id) => {
-        let confirmDelete = window.confirm("Confirm to Delete this Product?");
-        if (confirmDelete) {
-            await axios.delete(`https://62ad8a95402135c7acc26bf2.mockapi.io/products/${id}`)
+        try {
+            let confirmDelete = window.confirm("Confirm to Delete this Product?");
+            if (confirmDelete) {
+                await axios.delete(`/products/${id}`)
+            }
+            fetchData()
+        } catch (error) {
+            alert('Something went wrong!')
         }
-        fetchData()
     }
 
     return (

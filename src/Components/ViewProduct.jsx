@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../Axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -9,8 +9,12 @@ function ViewProduct() {
 
     useEffect(() => {
         let getViewData = async () => {
-            let viewFetch = await axios.get(`https://62ad8a95402135c7acc26bf2.mockapi.io/products/${id}`)
-            setViewData(viewFetch.data)
+            try {
+                let viewFetch = await axios.get(`/products/${id}`)
+                setViewData(viewFetch.data)
+            } catch (error) {
+                alert('Something went wrong!')
+            }
         }
         getViewData()
     }, [])

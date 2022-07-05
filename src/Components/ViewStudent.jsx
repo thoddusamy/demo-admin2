@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
+import axios from '../Axios'
 
 
 function ViewStudent() {
@@ -9,11 +9,15 @@ function ViewStudent() {
     let [getData, setGetData] = useState([])
 
     useEffect(() => {
-        let getData = async () => {
-            let getFetchData = await axios.get(`https://62ad8a95402135c7acc26bf2.mockapi.io/students/${id}`)
-            setGetData(getFetchData.data)
+        try {
+            let getData = async () => {
+                let getFetchData = await axios.get(`/students/${id}`)
+                setGetData(getFetchData.data)
+            }
+            getData()
+        } catch (error) {
+            alert('Something Went Wrong!')
         }
-        getData()
     }, [])
 
     return (
