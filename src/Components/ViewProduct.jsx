@@ -7,6 +7,7 @@ function ViewProduct() {
 
     const [viewData, setViewData] = useState([])
 
+
     useEffect(() => {
         let getViewData = async () => {
             try {
