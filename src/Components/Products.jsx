@@ -33,6 +33,8 @@ function Products() {
 
     return (
         <>
+            <h1 class='h3 mb-2 text-gray-800'>Products List</h1>
+            <br />
             <Link to="/mainpage/products/createproduct" className='btn btn-success mb-4'>Create Product</Link>
             <div className='row'>
                 {productData.map((data) => {
