@@ -11,25 +11,28 @@ import CreateProduct from './Components/CreateProduct'
 import ViewProduct from './Components/ViewProduct'
 import EditProduct from './Components/EditProduct'
 import Students from './Components/Students'
+import { DataProvider } from './ContextApi'
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Loginpage />} />
-        <Route path='/mainpage' element={<Mainpage />}>
-          <Route path='/mainpage' element={<Dashboard />} />
-          <Route path='/mainpage/dashboard' element={<Dashboard />} />
-          <Route path='/mainpage/students' element={<Students />} />
-          <Route path='/mainpage/students/createstudent' element={<CreateNewUser />} />
-          <Route path='/mainpage/students/viewstudent/:id' element={<ViewStudent />} />
-          <Route path='/mainpage/students/editstudent/:id' element={<EditStudent />} />
-          <Route path='/mainpage/products' element={<Products />} />
-          <Route path='/mainpage/products/createproduct' element={<CreateProduct />} />
-          <Route path='/mainpage/products/view/:id' element={<ViewProduct />} />
-          <Route path='/mainpage/products/edit/:id' element={<EditProduct />} />
-        </Route>
-      </Routes>
+      <DataProvider>
+        <Routes>
+          <Route path='/' element={<Loginpage />} />
+          <Route path='/mainpage' element={<Mainpage />}>
+            <Route path='/mainpage' element={<Dashboard />} />
+            <Route path='/mainpage/dashboard' element={<Dashboard />} />
+            <Route path='/mainpage/students' element={<Students />} />
+            <Route path='/mainpage/students/createstudent' element={<CreateNewUser />} />
+            <Route path='/mainpage/students/viewstudent/:id' element={<ViewStudent />} />
+            <Route path='/mainpage/students/editstudent/:id' element={<EditStudent />} />
+            <Route path='/mainpage/products' element={<Products />} />
+            <Route path='/mainpage/products/createproduct' element={<CreateProduct />} />
+            <Route path='/mainpage/products/view/:id' element={<ViewProduct />} />
+            <Route path='/mainpage/products/edit/:id' element={<EditProduct />} />
+          </Route>
+        </Routes>
+      </DataProvider>
     </BrowserRouter>
   )
 }

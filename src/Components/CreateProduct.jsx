@@ -1,4 +1,3 @@
-import React from 'react'
 import { useFormik } from 'formik'
 import axios from '../Axios'
 import { useNavigate } from 'react-router-dom'
@@ -50,7 +49,7 @@ function CreateProduct() {
             }
         }
     })
-
+    // < TextField id = "standard-basic" label = "Standard" variant = "standard" />
     return (
         <div className="container">
             <form onSubmit={formik.handleSubmit}>
@@ -103,3 +102,4 @@ function CreateProduct() {
 }
 
 export default CreateProduct
+
